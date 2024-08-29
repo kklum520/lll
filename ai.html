@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>ai</title>
+<style>
+#zt
+{
+    font-weight:900;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    background-color: #e0f2fe;
+    border-radius: 10px;
+    color: #f97316;
+}
+#t
+{
+    color: antiquewhite;
+
+}
+#navul
+{
+    width: 480px;
+    display: flex;
+    height: 40px;
+    box-shadow:2px 5px 15px rgba(0, 0,0, .5);
+    border-radius: 5px;
+    line-height: 40px;
+    position: relative;
+            
+}
+.ulson
+{
+    background-color: white;
+    box-shadow:2px 5px 15px rgba(0, 0,0, .5);
+    border-radius: 5px;
+    display: none;
+}
+.navli:hover .ulson
+{
+    display: block;
+        
+}
+.navli
+{
+    font-size: 20px;
+    width: 160px;
+    text-align: center;
+}
+ul li
+{
+    list-style:none;
+}
+.ulson li:not(:first-child)
+{
+    border-top: 1px solid #00ffc3;
+        
+}
+.lison:hover
+{
+    background-color: #4aa181;
+    border-radius: 3px;
+        
+}
+#hk
+{
+    position: absolute;
+    left: 0;
+    height: 40px;
+    width: 160px;
+    background-color: #c5c5c5;
+    border-radius: 5px;
+    z-index: -999;
+    transition: .5s;
+    display: none;
+        
+}
+.navli:nth-child(1):hover~#hk
+{
+    display: block;
+    left: 0;
+}
+.navli:nth-child(2):hover~#hk
+{
+    display: block;
+    left: 160px;
+}
+.navli:nth-child(3):hover~#hk
+    {
+    display: block;
+    left: 320px;
+}
+
+a:hover, a:visited, a:link, a:active 
+{
+    color: black;
+    text-decoration: none;
+}
+html
+{
+    scroll-behavior: smooth;
+        
+}
+        
+        
+</style>
+<style type="text/css">
+*{margin: 0;padding: 0;}
+.nav{
+        height: 100px;
+        width: 100%;
+        background: white;
+        position: fixed;
+        top: 0;  
+        left:0;
+        z-index: 99;
+              
+    }
+</style>
+        
+        
+<link rel="stylesheet" href="style.css"/>
+</head>
+        
+<body>
+    <div class="nav">
+        <div style="display: flex;height:60px;justify-content: start;align-items: center;font-size: 22px;font-weight: 1000;position: relative; box-shadow:2px 5px 10px rgba(188, 185, 185, 0.5);padding-left:10px;">
+            <div style="height: 40px;width: 400px;white-space: nowrap;text-align: center;line-height: 40px;margin-right: 180px;">
+                    AIGC提示词生成器
+            </div>
+        <div style="position: relative;position: absolute;right: 30px;">
+            <ul id="navul">
+                <li class="navli">
+                <a href="index.html">首页</a>               
+                </li>
+                <li class="navli">
+                <h4>关于我们</h4>
+                <ul class="ulson">
+                    <li class="lison">
+                        <a href="chanpin.html">产品信息</a>
+                    </li>
+                    <li class="lison">
+                        <a href="liaojie.html">了解使用</a>
+                    </li>
+                    <li class="lison">
+                        <a href="renyuan.html">制作人员</a>
+                    </li>
+                </ul>
+                </li>
+                <li class="navli">
+                <a href="#" id="back-to-top">返回顶部</a>
+                </li>
+                <div id="hk"></div>
+            </ul> 
+        </div>
+    </div>
+    </div>
+</head>
+<body>
+    <div style=" margin-top: 100px;height: 80px; width:1000px;background-color:#1d3557;margin-left: 80px;border-radius: 10px;">
+        <div style="font-size: 25px;color: white;margin-left: 50px;line-height: 80px;">最实用、最热门的 AI 工具，帮助你在工作与学习上更轻松、更有效率</div>
+    </div>
+    <div style="font-size:25px;margin-top: 40px;margin-left: 80px;font-weight: 800;">最新 AI 工具</div>
+    <div style="display: flex;flex-wrap:wrap;flex-direction: row;justify-content: start;margin-left: 50px;">
+    <div style="display:flex;background-color: #f8fafc;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 15em;margin: 15px 30px 15px ;border-radius:10px;flex-direction:column;position: relative;">
+        <img src="wxyy.png" width="160px" height="90px">
+        <div style="margin-top: 20px;line-height: 25px;font-size: 18px;">文心一言（英语：ERNIE Bot）是由百度公司开发的聊天机器人，能够与人交互、回答问题及协作创作。该产品被传媒称为聊天机器人ChatGPT的中国竞争对手</div>
+    </div>
+    <div style="display:flex;background-color: #f8fafc;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 15em;margin: 15px 30px 15px ;border-radius:10px;flex-direction:column;position: relative;">
+        <div style="padding-top: 20px;padding-left: 10px;">
+        <img src="jobr.png" width="160px" height="45px">
+        <div style="margin-top: 20px;line-height: 25px;font-size: 18px;">Jobright 是 AI求职助手，提供精准匹配、实时公司趋势分析，并自动生成专属履历，助你迅速获得理想职位。</div>
+        </div>
+    </div>
+    <div style="display:flex;background-color: #f8fafc;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 15em;margin: 15px 30px 15px ;border-radius:10px;flex-direction:column;position: relative;">
+        <div style="padding-top: 20px;padding-left: 10px;">
+            <img src="SpeechifyLogo-test.png" width="180px" height="45px">
+            <div style="margin-top: 20px;line-height: 25px;font-size: 18px;">超过两千万人使用的文字转语音阅读器，使用自然的声音，将文字内容(文章、email 和 PDF)转化为语音，供用户在线收听。</div>
+            </div>
+    </div>
+    </div>
+</body>
+</html>

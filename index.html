@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>AIGC提示词生成器</title>
+<style> 
+#zt1
+{
+font-weight:900;
+padding-left: 8px;
+padding-right: 8px;
+padding-bottom: 2px;
+background-color: #e0f2fe;
+border-radius: 10px;
+
+}
+#zt2
+{
+
+font-weight:900;
+
+}
+p.hidden
+{
+text-align:center;
+	border-style:hidden;
+	background:linear-gradient(90deg,#00ffc3,#00ffff,#00e1ff,#00ffff,#00ffc3);
+padding: 10px;
+} 
+button
+{
+	color: white;
+	padding: 8px 20px 10px 20px;
+	font-size: 15px;
+	border-top-right-radius:10px;
+border-bottom-left-radius:10px;
+	background: #f97316;
+	border: 1px solid #e8e8e8;
+	transition: all .3s;
+	box-shadow: 6px 6px 12px #c5c5c5,
+			 -6px -6px 12px #ffffff;
+margin-left: auto;
+height: 40px;
+font-weight:900;
+}
+button:active 
+{
+	color: #666;
+	box-shadow: inset 4px 4px 12px #c5c5c5,
+	inset -4px -4px 12px #ffffff;
+}
+#navul
+{
+width: 480px;
+display: flex;
+height: 40px;
+box-shadow:2px 5px 15px rgba(0, 0,0, .5);
+border-radius: 5px;
+line-height: 40px;
+position: relative;
+
+
+}
+.ulson
+{
+background-color: white;
+box-shadow:2px 5px 15px rgba(0, 0,0, .5);
+border-radius: 5px;
+display: none;
+}
+.navli:hover .ulson
+{
+display: block;
+
+}
+.navli
+{
+font-size: 20px;
+width: 120px;
+text-align: center;
+}
+ul li
+{
+list-style:none;
+}
+.ulson li:not(:first-child)
+{
+border-top: 1px solid #00ffc3;
+
+}
+.lison:hover
+{
+background-color: #4aa181;
+border-radius: 3px;
+
+}
+#hk
+{
+position: absolute;
+left: 0;
+height: 40px;
+width: 120px;
+background-color: #c5c5c5;
+border-radius: 5px;
+z-index: -999;
+transition: .5s;
+display: none;
+
+}
+.navli:nth-child(1):hover~#hk
+{
+display: block;
+left: 0;
+}
+.navli:nth-child(2):hover~#hk
+{
+display: block;
+left: 120px;
+}
+.navli:nth-child(3):hover~#hk
+{
+display: block;
+left: 240px;
+}
+.navli:nth-child(4):hover~#hk
+{
+display: block;
+left: 360px;
+}
+a:hover, a:visited, a:link, a:active 
+{
+color: black;
+text-decoration: none;
+}
+html
+{
+scroll-behavior: smooth;
+
+}
+#ttt a:hover,#ttt a:visited,#ttt a:link,#ttt a:active 
+{
+color: white;
+text-decoration: none;
+}
+#tt a:hover,#tt a:visited,#tt a:link,#tt a:active 
+{
+color: white;
+text-decoration: none;
+background-color: #4aa181;
+}
+</style>
+<style type="text/css">
+*{margin: 0;padding: 0;}
+ .nav{
+ height: 100px;
+ width: 100%;
+ background: white;
+ position: fixed;
+ top: 0;
+ left:0;
+ z-index: 99;
+
+ }
+</style>
+
+
+<!-- <link rel="stylesheet" href="gongdong.css"/> -->
+</head>
+
+<body>
+<div class="nav">
+<div style="display: flex;height:60px;justify-content: start;align-items: center;font-size: 22px;font-weight: 1000;position: relative; box-shadow:2px 5px 10px rgba(188, 185, 185, 0.5);padding-left:10px;">
+	<div style="height: 40px;width: 400px;white-space: nowrap;text-align: center;line-height: 40px;margin-right: 180px;">
+			AIGC提示词生成器
+	</div>
+<div style="position: relative;margin-left: 500px;">
+<ul id="navul">
+ <li class="navli">
+ <h4>首页</h4>
+ <ul class="ulson">
+<li class="lison">
+<a href="#a">写报告</a>
+</li>
+<li class="lison">
+<a href="#b">资料整理</a>
+</li>
+<li class="lison">
+<a href="#c">履历与自传</a>
+</li>
+<li class="lison">
+<a href="#d">准备面试</a>
+</li>
+<li class="lison">
+<a href="#e">程序开发</a>
+</li>
+<li class="lison">
+<a href="#f">知识学习</a>
+</li>
+<li class="lison">
+<a href="#g">英语学习</a>
+</li>
+<li class="lison">
+<a href="#h">工作生产力</a>
+</li>
+<li class="lison">
+<a href="#i">写作帮手</a>
+</li>
+ </ul>
+ </li>
+ <li class="navli">
+<br>
+<ul class="ulson">
+ <li class="lison">
+<a href="#j">社交媒体</a>
+ </li>
+ <li class="lison">
+<a href="#k">销售</a>
+ </li>
+ <li class="lison">
+<a href="#l">行销与SEO</a>
+ </li>
+ <li class="lison">
+<a href="#m">产品管理</a>
+ </li>
+ <li class="lison">
+<a href="#n">HR与招募</a>
+ </li>
+ <li class="lison">
+<a href="#o">投资与交易</a>
+</li>
+ <li class="lison">
+<a href="#p">日常生活</a>
+</li>
+ <li class="lison">
+<a href="#q">有趣好玩</a>
+</li>
+ <li class="lison">
+<a href="#r">角色扮演</a>
+</li>
+</ul>
+</li>
+ <li class="navli">
+<h4>关于我们</h4>
+<ul class="ulson">
+ <li class="lison">
+	<a href="chanpin.html">产品信息</a>
+</li>
+ <li class="lison">
+	<a href="liaojie.html">了解使用</a>
+</li>
+ <li class="lison">
+	<a href="renyuan.html">制作人员</a>
+</li>
+</ul>
+
+</li>
+<li class="navli">
+<a href="#" id="back-to-top">返回顶部</a>
+</li>
+<div id="hk"></div>
+</ul>
+
+</div>
+
+</div>
+<p class="hidden">更直接的教你 ChatGPT 指令，方便你进行实作创新！</div>
+</div>
+
+
+
+<div style="display: flex;flex-direction:column;">
+ <div style="font-size:50px;padding: 200px 0 0;text-align:center">ChatGPT 指令大全</div>
+ <div style="font-size:15px;padding: 20px;text-align:center">本站提供数百个精炼过的指令语句 （提示词），让你充分发挥 ChatGPT 的强大功能</div>
+</div>
+<div style="display: flex;flex-direction:row;justify-content:center;margin-top: 15px;">
+ <div style="border-style:hidden;border-radius:10px;padding: 10px;background:linear-gradient(90deg,#008cff,#0080ff,#003cff);color:white;margin-right: 25px;"><div id="ttt"><a href="liaojie.html">了解如何使用</a></div></div>
+ <div style="border-style:hidden;border-radius:10px;padding: 10px;background:linear-gradient(90deg,#ff7300,#ff6a00,#ff9500);color:white;"><div id="ttt"><a href="ai.html">AI 工具百宝箱</a></div></div>
+</div>
+
+
+<div style="display: flex;flex-direction:row;padding: 60px;flex-wrap:wrap;color: #4aa181;font-weight:800;justify-content: center;">
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">全部</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">写报告</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">资料整理</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">履历与自传</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">准备面试</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">程序开发</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">知识学习</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">英语学习</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">工作生产力</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">写作帮手</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">社交媒体</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">销售</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">行销与SEO</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">产品管理</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">HR与招募</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">投资与交易</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">日常生活</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">有趣好玩</div>
+ <div style="border:2px solid;border-radius:10px;padding: 10px 20px;margin: 8px">角色扮演</div>
+</div>
+
+<div style="padding-top: 100px;margin-top: -100px;" id="a">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">写报告</div>
+ </div>
+<div style="display: flex;flex-wrap:wrap;flex-direction: row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+		<button id="产生 数字 个具有说服力和描述性的文章主题想法,主题为「某个主题」"onclick="copyText1(this.id)">复制</button>
+<script>
+
+function handleCopyValue(text) {
+//浏览器禁用了非安全域的 navigator.clipboard 对象
+//在线上环境会报错 TypeError: Cannot read properties of undefined (reading 'writeText')
+if (!navigator.clipboard && window.isSecureContext) {
+return navigator.clipboard.writeText(text);
+} else {
+// 判断是否支持拷贝
+if (!document.execCommand('copy')) return Promise.reject()
+// 创建标签，并隐藏
+const textArea = document.createElement('textarea')
+textArea.style.position = 'fixed'
+textArea.style.top = textArea.style.left = '-100vh'
+textArea.style.opacity = '0'
+textArea.value = text
+document.body.appendChild(textArea)
+// 聚焦、复制
+textArea.focus()
+textArea.select()
+return new Promise((resolve, reject) => {
+// 不知为何，必须写这个三目，不然copy不上
+document.execCommand('copy') ? resolve() : reject()
+textArea.remove()
+})
+}
+}
+ 
+/*点击复制 ，val是需要复制的值 */
+function copyText1(val){
+ handleCopyValue(val)
+.then(() => {
+alert('复制成功')
+})
+.catch(() => {
+alert('自动复制失败，请手动复制')
+})
+ 
+}
+ 
+</script>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">选定切入角度</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>产生 <font id="zt1">数字</font> 个具有说服力和描述性的文章主题想法，主题为「<font id="zt1">某个主题</font>」</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>产生3个具有说服力和描述性的文章主题想法，主题为社交媒体如何影响青少年</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="我现在正在 报告的情境与目的 。我的简报主题是 某个主题 ，请提供 数字 种开头方式，要简单到 目标族群 能听懂，同时要足够能吸引人，让他们愿意专心听下去"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">报告开头</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>我现在正在 <font id="zt1">报告的情境与目的</font>我的简报主题是「 <font id="zt1">某个主题</font> 」，请提供<font id="zt1">数字</font> 种开头方式，要简单到 <font id="zt1">目标族群</font> 能听懂，同时要足够能吸引人，让他们愿意专心听下去</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 我现在正在修北大的简报课，其中一项作业是要做一份让小学生能听懂的简报。 我的简报主题是机会成本，请提供三种开头方式，要简单到小学生能听懂，同时要足够能吸引人，让他们愿意专心听下去</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="为一篇题为「某个主题」的 数字 字文章产生大纲。内容包括前言、主段落和结论。请确保包括有关该主题的主要观点和论点。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">大纲生成</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>为一篇题为「<font id="zt1">某个主题</font>」的 <font id="zt1">数字</font> 字文章产生大纲。内容包括前言、主段落和结论。请确保包括有关该主题的主要观点和论点。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 为一篇题为社交媒体如何影响青少年的心理健康的1000字文章产生大纲。内容包括前言、主段落和结论。请确保包括有关该主题的主要观点和论点。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="撰写一篇文章题目为：「某个主题」的草稿，结构需要完整。 草稿中要包含 数字 个可以在文中进一步阐述的要点。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">草稿撰写</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>撰写一篇文章题目为：「<font id="zt1">某个主题</font>」的草稿，结构需要完整。 草稿中要包含 <font id="zt1">数字</font> 个可以在文中进一步阐述的要点。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 撰写一篇文章题目为：社交媒体如何影响青少年的心理健康的草稿，结构需要完整。 草稿中要包含 3 个可以在文中进一步阐述的要点。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="写出一篇有关知识的 数字 字研究报告，报告中需引述最新的研究，并引用专家观点。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">研究报告</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>写出一篇有关 <font id="zt1">知识</font> 的 <font id="zt1">数字</font> 字研究报告，报告中需引述最新的研究，并引用专家观点。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 写出一篇有关自动驾驶的300字研究报告，报告中需引述最新的研究，并引用专家观点。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是 某个主题 的专家，请针对以下论述 附上论述，提出 数字 个反驳的论点，每个论点都要有佐证。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">提出反对观点</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是「 <font id="zt1">某个主题</font> 」的专家，请针对以下论述 <font id="zt1">附上论述</font> ，提出 <font id="zt1">数字</font> 个反驳的论点，每个论点都要有佐证。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是大数据分析的专家，请针对以下论述「在数据分析中，越多数据越好」，提出 3 个反驳的论点，每个论点都要有佐证。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是 某个主题的专家，请总结以下内容，并针对以下内容提出未来能进一步研究的方向 附上内容 。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">报告总结</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是「 <font id="zt1">某个主题</font> 」的专家，请总结以下内容，并针对以下内容提出未来能进一步研究的方向 <font id="zt1">附上内容</font> 。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>你是金融科技专家，请总结以下内容，并针对以下内容提出未来能进一步研究的方向 [附上内容]。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="提供数字 个有关于「某个主题」题目的研究来源。 这些研究来源必须来自可靠和高质量的数据库和学术搜索引擎。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">研究来源</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>提供 <font id="zt1">数字</font> 个有关于「 <font id="zt1">某个主题</font> 」题目的研究来源。 这些研究来源必须来自可靠和高质量的数据库和学术搜索引擎。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>提供3个有关于社交媒体如何影响青少年题目的研究来源。 这些研究来源必须来自可靠和高质量的数据库和学术搜索引擎。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="b">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">资料整理</div>
+ </div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+		<button id="给我 数字 篇，有关 领域 的文章"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">搜集资料</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>给我 <font id="zt1">数字</font> 篇，有关 <font id="zt1">领域</font> 的文章。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>给我 5 篇，有关 SEO 的文章。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+		<button id="用列点的方式总结出这篇文章的 数字 个重点：附上文章内容/附上文章网址。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">内容总结</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>用列点的方式总结出这篇文章的<font id="zt1">数字</font> 个重点：<font id="zt1">附上文章内容/附上文章网址</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>用列点的方式总结出这篇文章的 5 个重点：[附上文章内容/附上文章网址]。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+		<button id="用列点的方式总结出这篇文章的 数字 个重点：附上文章内容/附上文章网址。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">摘录某领域重点</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>用列点的方式总结出 <font id="zt1">数字</font> 个 <font id="zt1">领域</font>知识重点。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>用列点的方式总结出10个量子力学知识重点。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="c">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">履历与自传</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="这份职位的履历，有哪边可以写更好？ 请以专业面试官的角度，提出具体改进建议。 接着以你的建议来改写这段经历，改写时请维持列点的形式。 附上履历"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">寻求履历的反馈</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>这份 <font id="zt1">职位</font> 的履历，有哪边可以写更好？请以专业面试官的角度，提出具体改进建议。接着以你的建议来改写这段经历，改写时请维持列点的形式。<font id="zt1">附上履历</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 这份UIUX设计师的履历，有哪边可以写更好？ 请以专业面试官的角度，提出具体改进建议。 接着以你的建议来改写这段经历，改写时请维持列点的形式。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="改写以下履历，为每一点加上量化的数据，改写时请维持列点的形式。 附上履历"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">为履历加上量化数据</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>改写以下履历，为每一点加上量化的数据，改写时请维持列点的形式。 <font id="zt1">附上履历</font> </div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="把这段经历写得更精简一点，让别人可以马上看到重点，同时维持生动的描述。 附上经历"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">把经历修精简</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>把这段经历写得更精简一点，让别人可以马上看到重点，同时维持生动的描述。<font id="zt1">附上经历</font> </div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="我今天要申请 公司 的 职位，改写以下经历，让我能更符合 公司 的企业文化。 附上经历"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">为不同公司定制化撰写履历</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>我今天要申请 <font id="zt1">公司</font> 的 <font id="zt1">职位</font> ，改写以下经历，让我能更符合 <font id="zt1">公司</font> 的企业文化。<font id="zt1">附上经历</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 我今天要申请 Google 的前端工程师，改写以下经历，让我能更符合 Google 的企业文化。 [附上经历]</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="d">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">准备面试</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是 公司 的 职位 面试官，请分享在 职位 面试时最常会问的 数字 个问题。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">汇整面试题目</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是 <font id="zt1">公司</font> 的 <font id="zt1">职位</font> 面试官，请分享在 <font id="zt1">职位</font> 面试时最常会问的 <font id="zt1">数字</font> 个问题。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是 Google 的产品经理面试官，请分享在 Google 产品经理面试时最常会问的 5 个问题。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="我针对问题的回答，有哪些可以改进的地方？ 附上回答"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">给予回馈</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>我针对 <font id="zt1">问题</font> 的回答，有哪些可以改进的地方？ <font id="zt1">附上回答</font> </div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 我针对「你会如何排定不同产品功能优先级？」 的回答，有哪些可以改进的地方？ [附上回答]</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="针对 问题 这个面试问题，请提供一些常见的追问面试题。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">提供追问的问题</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>针对 <font id="zt1">问题</font> 这个面试问题，请提供一些常见的追问面试题。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 针对「你会如何排定不同产品功能优先级？」 这个面试问题，请提供一些常见的追问面试题。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 28em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="我在准备 问题 这个面试问题，请用 STAR 原则帮我回答这个问题。 针对这个问题，我有的经历如下 附上经历。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">用STAR原则回答面试问题</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>我在准备 <font id="zt1">问题</font> 这个面试问题，请用 STAR 原则帮我回答这个问题。 针对这个问题，我有的经历如下 <font id="zt1">附上经历</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 我在准备「请分享一个你在急迫的期限中完成项目的经验」这个面试问题，请用 STAR 原则帮我回答这个问题。 针对这个问题，我有的经历如下 [附上经历]。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 28em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="撰写一封个性化的电子邮件给公司的面试官，对面试官抽出时间进行职位面试表达感谢。 在邮件中要提到面试后，你对角色和团队有更深入的了解，并且真的很喜欢团队和职位的特点1和特点2。 语气不要太正式，也不要太随便。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">感谢面试官的 email</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>撰写一封个性化的电子邮件给 <font id="zt1">公司</font> 的 <font id="zt1">面试官</font> ，对面试官抽出时间进行 <font id="zt1">职位</font> 面试表达感谢。在邮件中要提到面试后，你对角色和团队有更深入的了解，并且真的很喜欢团队和职位的 <font id="zt1">特点1</font> 和 <font id="zt1">特点2</font> 。 语气不要太正式，也不要太随便。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 撰写一封个性化的电子邮件给 Google 的面试官 PJ，对面试官抽出时间进行前端工程师面试表达感谢。 在邮件中要提到面试后，你对角色和团队有更深入的了解，并且真的很喜欢团队和职位的开放文化和对于新技术的热情。 语气不要太正式，也不要太随便。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="e">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">程序开发</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一个 编程 专家，请帮我用 编程 写一个函数，它需要做到 某个功能"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">写程序</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一个 <font id="zt1">编程</font> 专家，请帮我用 <font id="zt1">编程</font> 写一个函数，它需要做到 <font id="zt1">某个功能</font> </div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一个 JavaScript 专家，请帮我用 JavaScript 写一个函式，它需要做到 输入一个一维阵列，把这个一维阵列转换成二维阵列。 同时我要能够自由地决定二维阵列中的子阵列长度是多少</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一个 程序语言 专家，请告诉我以下的代码在做什么。 附上代码"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">解读代码</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一个 <font id="zt1">程序语言</font> 专家，请告诉我以下的代码在做什么。 <font id="zt1">附上代码</font></div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一个 Clean Code 专家，我有以下的代码，请用更干净简洁的方式改写，让我的同事们可以更容易维护代码。 另外，也解释为什么你要这样重构，让我能把重构的方式的说明加到Pull Request当中。 附上代码"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">重构代码</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一个 Clean Code 专家，我有以下的代码，请用更干净简洁的方式改写，让我的同事们可以更容易维护代码。 另外，也解释为什么你要这样重构，让我能把重构的方式的说明加到Pull Request当中。<font id="zt1">附上代码</font></div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一个编程 专家，我有一段代码，我预期这段代码可以做到某个功能，只是它通过不了 测试案例 这个测试案例。 请帮我找出我哪里写错了，以及用正确的方式改写。 附上代码"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">解bug</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一个 <font id="zt1">编程</font> 专家，我有一段代码，我预期这段代码可以 <font id="zt1">做到某个功能</font> ，只是它通过不了 <font id="zt1">测试案例</font> 这个测试案例。请帮我找出我哪里写错了，以及用正确的方式改写。<font id="zt1">附上代码</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一个 python 专家，我有一段代码，我预期这段代码可以判断一个字串是不是镜像回文，只是它通过不了 aacdeedcc 这个测试案例。 请帮我找出我哪里写错了，以及用正确的方式改写。 [附上代码]</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一个 程序语言 专家，我有一段代码 附上代码，请帮我写一个测试，请至少提供五个测试案例，同时要包含到极端的状况，让我能够确定这段代码的输出是正确的。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">写测试</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一个 <font id="zt1">程序语言</font> 专家，我有一段代码 <font id="zt1">附上代码</font> ，请帮我写一个测试，请至少提供五个测试案例，同时要包含到极端的状况，让我能够确定这段代码的输出是正确的。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一个 Regex 专家，请帮我写一个 Regex ，它能够把 需求"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">写 Regex</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一个 Regex 专家，请帮我写一个 Regex ，它能够把 <font id="zt1">需求</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一个 Regex 专家，请帮我写一个 Regex ，它能够把输入一个字符串，把这个字符串中的所有数字都取出来。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="f">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">知识学习</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height:20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="详细的说明 填入想了解的知识"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">概念解说</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>详细的说明 <font id="zt1">填入想了解的知识</font> </div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 详细的说明如何制造一台电脑。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height:20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你扮演 科目老师 的角色，我需要理解 理论 。 请用 方式 方式描述。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">简易教学</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你扮演 <font id="zt1">科目老师</font> 的角色， 我需要理解 <font id="zt1">理论</font>。请用 <font id="zt1">方式</font> 方式描述。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你扮演数学老师的角色， 我需要理解一元二次方程式。 请用浅显易懂方式描述。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height:20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是一个 知识专家，你要教我深度的 知识"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">深度教学</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是一个 <font id="zt1">知识专家</font> ，你要教我深度的 <font id="zt1">知识</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是一个SEO专家，你要教我深度的SEO知识。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height:20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="教我 知识，最后给我一个测验"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">教学与测验</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>教我 <font id="zt1">知识</font> ，最后给我一个测验。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 教我一元二次方程式，最后给我一个测验。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height:20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="以一位 领域 教育家的身份，说明 概念 是什么。同时提供 数字 个例子，来解释 概念 背后的原理"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">解释一个主题的背后原理</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>以一位 <font id="zt1">领域</font> 教育家的身份，说明 <font id="zt1">概念</font> 是什么。同时提供 <font id="zt1">数字</font> 个例子，来解释 <font id="zt1">概念</font> 背后的原理。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 以一位数学教育家的身份，说明一元二次方程式是什么。同时提供三个例子，来解释一元二次方程式背后的原理。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="g">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">英语学习</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="用 中文/英文 解释以下英文单词：填入一个或多个单字。请用表格的方式呈现，并且表格内须包含单字、词性、解释与例句。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">背单字法宝</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>用 <font id="zt1">中文/英文</font> 解释以下英文单词：<font id="zt1">填入一个或多个单字</font> 。 请用表格的方式呈现，并且表格内须包含单字、词性、解释与例句。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 用中文解释以下英文单词：apple， orange， doctor， car， run。 请用表格的方式呈现，并且表格内须包含单字、词性、解释与例句。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="解释英文单字 英文单字，并且给我 数字 个常用句子。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">英语单字学习</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>解释英文单字 <font id="zt1">英文单字</font>，并且给我 <font id="zt1">数字</font> 个常用句子。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 解释英文单字divest，并且给我5个常用句子。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="Can we have a conversation about 话题？"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">英语对话</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>Can we have a conversation about <font id="zt1">话题</font> ?</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> Can we have a conversation about machine learning?</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="现在你是一位英语教师。提供学习英语的技巧和诀窍。包括提高词汇、语法和发音的学习方法。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">提供学习方法</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>现在你是一位英语教师。提供学习英语的技巧和诀窍。包括提高词汇、语法和发音的学习方法。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="现在你是一位专业的英语老师。请提供几个可以帮助学习的资源和工具列表，例如语言交换网站、播客和手机应用程序。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">推荐学习素材</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>现在你是一位专业的英语老师。请提供几个可以帮助学习的资源和工具列表，例如语言交换网站、播客和手机应用程序。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="Can you check the spelling and grammar in the following text? 附上英文文字"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">校阅英文文法</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>Can you check the spelling and grammar in the following text? <font id="zt1">附上英文文字</font>。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="校阅以下英文文章，并用表格的方式呈现，要有三个字段，分别是原文、修正后的版本，以及用中文详解为什么要这样修改：附上英文文章"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">英文作文修改与解释</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>校阅以下英文文章，并用表格的方式呈现，要有三个字段，分别是原文、修正后的版本，以及用中文详解为什么要这样修改： <font id="zt1">附上英文文章</font>。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 20em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="Please correct my grammar and spelling mistakes in the text above： 附上英文文字"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">纠正文法和拼字错误</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>Please correct my grammar and spelling mistakes in the text above： <font id="zt1">附上英文文字</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> Please correct my grammar and spelling mistakes in the text above: I love eat fooded</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="h">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">工作生产力</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是一名 职业，我会给你一封电子邮件，你要回复这封电子邮件。 电子邮件：附上内容"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">回复Email</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是一名 <font id="zt1">职业</font> ，我会给你一封电子邮件，你要回复这封电子邮件。电子邮件：<font id="zt1">附上内容</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是一名产品经理，我会给你一封电子邮件，你要回复这封电子邮件。 电子邮件：[附上内容]</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是一名工作生产力专家，我目前有工作生产力不佳的问题，我时常会遇到问题，请提供我改善生产力的具体建议。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">提供改善生产力的建议</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是一名工作生产力专家，我目前有工作生产力不佳的问题，我时常会遇到 <font id="zt1">问题</font> ，请提供我改善生产力的具体建议。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是一名工作生产力专家，我目前有工作生产力不佳的问题，我时常会遇到会在工作上分心的状况，请提供我改善生产力的具体建议。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是一名工作生产力专家，请提供我深度工作的具体建议，让我在领域的工作中，能够更有效率的完成工作。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">深度工作</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是一名工作生产力专家，请提供我深度工作的具体建议，让我在 <font id="zt1">领域</font> 的工作中，能够更有效率的完成工作。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是一名工作生产力专家，请提供我深度工作的具体建议，让我在社群媒体写作的工作中，能够更有效率的完成工作。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="i">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">写作帮手</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="写出 数字 个有关 主题 的 社交平台 风格标题，要遵守以下规则：规则 1、规则 2、其他规则。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">撰写标题</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>写出 <font id="zt1">数字</font> 个有关 <font id="zt1">主题</font> 的 <font id="zt1">社交平台</font> 风格标题，要遵守以下规则：<font id="zt1">规则 1</font>、<font id="zt1">规则 2</font>、<font id="zt1">其他规则</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>写出5个有关日本迪士尼旅游心得的Instagram风格标题，要遵守以下规则：标题不超过20字、标题要加上适当表情符号。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="提供 某主题 主题的文章大纲"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">撰写文章大纲</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>提供 <font id="zt1">某主题</font> 主题的文章大纲。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>提供美国留学主题的文章大纲。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="针对 主题 这个主题生成一篇文章。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">文章撰写</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>针对 <font id="zt1">主题</font> 这个主题生成一篇文章。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 针对使用 ChatGPT 小诀窍这个主题生成一篇文章。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="将以下产品关键字生成 数字 句的产品文案。 产品关键词：附上关键词..."onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">产品文案</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>将以下产品关键字生成 <font id="zt1">数字</font> 句的产品文案。产品关键词：<font id="zt1">附上关键词...</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 将以下产品关键字生成 10 句的产品文案。 产品关键词：球鞋、春季最新款、多种颜色、适合慢跑。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一名专业的内容写手，草拟一篇 主题 相关的信息性文章。文章应在 数字 字以内，包括 子主题 的重要性、各种类型及其优点。请务必引用相关统计数据、例子和来源支持你的观点。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">草拟一篇文章</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一名专业的内容写手，草拟一篇 <font id="zt1">主题</font> 相关的信息性文章。文章应在 <font id="zt1">数字</font> 字以内，包括 <font id="zt1">子主题</font> 的重要性、各种类型及其优点。请务必引用相关统计数据、例子和来源支持你的观点。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一名专业的内容写手，草拟一篇网络游戏相关的信息性文章。 文章应在500字以内，包括网络游戏的重要性、各种类型及其优点。 请务必引用相关统计数据、例子和来源支持你的观点。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="请扮演编辑人员，提供反馈以改善以下文章的文法。请识别和更正任何错误，同时提出改善写作风格的建议。请务必对您的建议和更正提供清晰的解释。文章为附上文章。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">改正文法错误</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>请扮演编辑人员，提供反馈以改善以下文章的文法。请识别和更正任何错误，同时提出改善写作风格的建议。请务必对您的建议和更正提供清晰的解释。文章为 <font id="zt1">附上文章</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 请扮演编辑人员，提供反馈以改善以下文章的文法。请识别和更正任何错误，同时提出改善写作风格的建议。请务必对您的建议和更正提供清晰的解释。文章为[附上文章]。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是名专业写作人员，针对以下主题的写出支持论述的论点。 该部分为附上文章。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">撰写支持的论点</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是名专业写作人员，针对以下 <font id="zt1">主题</font> 的写出支持 <font id="zt1">论述</font> 的论点。该部分为<font id="zt1">附上文章</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是名专业写作人员，针对以下网络游戏的写出支持游戏对人类有正面的影响的论点。 该部分为[附上文章]。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="j">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">社交媒体</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="产生数字 个针对「某个主题」的社群媒体 文章想法，以吸引「族群」的注意。在可能的情况下，包含呼吁行动 （CTA）、图片和标签。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">文案概念发想</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>产生 <font id="zt1">数字</font> 个针对「<font id="zt1">某个主题</font>」的 <font id="zt1">社群媒体</font> 文章想法，以吸引「<font id="zt1">族群</font>」的注意。在可能的情况下，包含呼吁行动 （CTA）、图片和标签。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 产生3个针对「新开的韩国烤肉吃到饱」的Instrgram文章想法，以吸引「20-30的女性」的注意。在可能的情况下，包含呼吁行动 （CTA）、图片和标签。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="请建立一个社交媒体行事历，内容是宣传数字天的「某个主题」。形式以表格格式呈现，要包含内容创意、发布频率、发布时间和吸引人的参与策略。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">社群经营时程安排</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>请建立一个社交媒体行事历，内容是宣传 <font id="zt1">数字</font> 天的「<font id="zt1">某个主题</font>」。 形式以表格格式呈现，要包含内容创意、发布频率、发布时间和吸引人的参与策略。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 请建立一个社交媒体行事历，内容是宣传3天的「新开的韩国烤肉吃到饱」。形式以表格格式呈现，要包含内容创意、发布频率、发布时间和吸引人的参与策略。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="为以下的关键字和文章标题建立 数字 个用户友善的 URL 建议。关键词：附上关键词...文章标题：标题。Url 不需要提供 domain。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">URL slug 命名建议</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>为以下的关键字和文章标题建立 <font id="zt1">数字</font> 个用户友善的 URL 建议。关键词：<font id="zt1">附上关键词...</font> 文章标题：<font id="zt1">标题</font>。Url 不需要提供 domain。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 为以下的关键字和文章标题建立 3 个用户友善的 URL 建议。关键词：韩国、烤肉、吃到饱。文章标题：新开的韩国烤肉吃到饱。Url 不需要提供 domain。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="生成数字 个关于「某个主题」短影音平台 想法。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">短影音影片想法</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>生成 <font id="zt1">数字</font> 个关于「<font id="zt1">某个主题</font>」<font id="zt1">短影音平台</font> 想法。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 生成1个关于「新开的韩国吃到饱」Instagram Reels 想法。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="k">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">销售</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为公司名称的销售员，你需要为产品名称创建一个有说服力的销售演讲。撰写一个脚本，说明产品的独特功能和好处，并解决潜在客户的常见问题。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">销售演说</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司名称</font> 的销售员，你需要为 <font id="zt1">产品名称</font> 创建一个有说服力的销售演讲。撰写一个脚本，说明产品的独特功能和好处，并解决潜在客户的常见问题。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的销售员，你需要为企业版 Office 365 创建一个有说服力的销售演说。撰写一个脚本，说明产品的独特功能和好处，并解决潜在客户的常见问题。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为公司名称的销售员，你需要针对领域的潜在客户，准备电话销售讲稿。你要研究客户的需求和挑战，并准备一个定制的电话销售讲稿，在销售的过程中，要说明你的产品如何帮助解决客户的问题。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">电话销售</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司名称</font> 的销售员，你需要针对 <font id="zt1">领域</font> 的潜在客户，准备电话销售讲稿。你要研究客户的需求和挑战，并准备一个定制的电话销售讲稿，在销售的过程中，要说明你的产品如何帮助解决客户的问题。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的销售员，你需要针对科技领域的潜在客户，准备电话销售脚本。你要研究客户的需求和挑战，并准备一个定制的电话销售讲稿，在销售的过程中，要说明你的产品如何帮助解决客户的问题。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为公司的销售员，请创建一个潜在客户的清单，来推销产品。该清单要涵盖最有可能购买的客户，并且要包含客户的姓名、联系方式、公司名称、职位、产品需求等信息。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">产出潜在客户清单</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司</font> 的销售员，请创建一个潜在客户的清单，来推销 <font id="zt1">产品</font>。该清单要涵盖最有可能购买的客户，并且要包含客户的姓名、联系方式、公司名称、职位、产品需求等信息。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的销售员，请创建一个潜在客户的清单，来推销企业版的 Office 365。该清单要涵盖最有可能购买的客户，并且要包含客户的姓名、联系方式、公司名称、职位、产品需求等信息。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为公司的业务员，您需要为产品制定一个完整的销售计划，以最大化客户获取和收益。请分析过往的销售数据、潜在客户信息，确定能够把握住每一个客户，同时做出有效的资源分配。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">销售领域计划</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司</font> 的业务员，您需要为 <font id="zt1">产品</font> 制定一个完整的销售计划，以最大化客户获取和收益。请分析过往的销售数据、潜在客户信息，确定能够把握住每一个客户，同时做出有效的资源分配。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的业务员，您需要为企业版 Office 365 制定一个完整的销售计划，以最大化客户获取和收益。请分析过往的销售数据、潜在客户信息，确定能够把握住每一个客户，同时做出有效的资源分配。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 23em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为公司的业务主管，你需要为新进业务制定一个培训计划。请为主题建立一个有架构性的培训计划，要涵盖产品知识、销售技巧和客户关系管理等面向。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">销售培训计划</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司</font> 的业务主管，你需要为新进业务制定一个培训计划。请为 <font id="zt1">主题</font> 建立一个有架构性的培训计划，要涵盖产品知识、销售技巧和客户关系管理等面向。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的业务主管，你需要为新进业务制定一个培训计划。请为企业版 Office 365 建立一个有架构性的培训计划，要涵盖产品知识、销售技巧和客户关系管理等面向。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="l">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">行销与SEO</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 28em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一位 产业 的营销经理，你需要为即将到来的一年，创建一个全面的营销策略计划。这个计划需要包括目标受众分析、营销渠道、预算分配和用于追踪成功的指标。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">营销策略</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一位 <font id="zt1">产业</font> 的营销经理，你需要为即将到来的一年，创建一个全面的营销策略计划。这个计划需要包括目标受众分析、营销渠道、预算分配和用于追踪成功的指标。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>作为一位 B2B 科技公司的营销经理，你需要为即将到来的一年，创建一个全面的营销策略计划。这个计划需要包括目标受众分析、营销渠道、预算分配和用于追踪成功的指标。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height:28em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一个领域的数字营销人员，创建一个 Email 营销活动，以推广产品。利用你对受众的了解，撰写一系列引人入胜的 Email，突出产品的独特特点和优势。透过引人入胜的主题行和明确的呼吁行动，最大化开启率和转换率。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">Email 营销</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一个 <font id="zt1">领域</font> 的数字营销人员，创建一个 Email 营销活动，以推广 <font id="zt1">产品</font>。 利用你对 <font id="zt1">受众</font> 的了解，撰写一系列引人入胜的 Email，突出产品的独特特点和优势。透过引人入胜的主题行和明确的呼吁行动，最大化开启率和转换率。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为一个 B2B 科技公司的数字营销人员，创建一个 Email 营销活动，以推广企业版 Office 365。利用你对高阶管理人员的了解，撰写一系列引人入胜的 Email，突出产品的独特特点和优势。透过引人入胜的主题行和明确的呼吁行动，最大化开启率和转换率。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 28em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为公司的社交媒体经理，创建一个社交媒体营销活动，以宣传产品。设计一个具有创意和吸引力的在线活动，通过多样化的社交媒体贴文和付费广告，来推进营销计划。同时设定明确的目标和衡量指标，以确保营销方案有达到预期的成果。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">社交媒体营销</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司</font> 的社交媒体经理，创建一个社交媒体营销活动，以宣传 <font id="zt1">产品</font>。 设计一个具有创意和吸引力的在线活动，通过多样化的社交媒体贴文和付费广告，来推进营销计划。 同时设定明确的目标和衡量指标，以确保营销方案有达到预期的成果。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>作为微软的社交媒体经理，创建一个社交媒体营销活动，以宣传企业版 Office 365。 设计一个具有创意和吸引力的在线活动，通过多样化的社交媒体贴文和付费广告，来推进营销计划。 同时设定明确的目标和衡量指标，以确保营销方案有达到预期的成果。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 28em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为主题的SEO专家，生成一个相关的SEO关键词列表，以优化网站内容并提高其搜索引擎排名。 考虑因素要包含搜索量、竞争力和目标受众的相关性，并使用关键词研究工具来找寻优化的机会。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">SEO 关键词发想</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">主题</font> 的SEO专家，生成一个相关的SEO关键词列表，以优化网站内容并提高其搜索引擎排名。 考虑因素要包含搜索量、竞争力和目标受众的相关性，并使用关键词研究工具来找寻优化的机会。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为旅游网站的SEO专家，生成一个相关的SEO关键词列表，以优化网站内容并提高其搜索引擎排名。 考虑因素要包含搜索量、竞争力和目标受众的相关性，并使用关键词研究工具来找寻优化的机会。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 28em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是公司的SEO专家，负责优化网站的meta描述。 利用你对SEO最佳实践和对业务的了解，为网页编写引人入胜的meta描述。 同时确保meta描述足够简洁。">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">生成网站meta描述</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是 <font id="zt1">公司</font> 的SEO专家，负责优化网站的meta描述。 利用你对SEO最佳实践和对 <font id="zt1">业务</font> 的了解，为网页编写引人入胜的meta描述。 同时确保meta描述足够简洁。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font>你是生产力工具的SEO专家，负责优化网站的meta描述。 利用你对SEO最佳实践和对Office 365的了解，为网页编写引人入胜的meta描述。 同时确保meta描述足够简洁。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="m">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">产品管理</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 500px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为 公司的产品经理，你的任务是为未来一年创建产品路径图。 这个产品路径图应该概述每个季度将开发和上限的主要功能和功能，以及任何会影响开发时间表的相依性或技术考虑因素。 该公司是一家公司类别的公司，主要销售产品名称，目标市场是目标市场，公司愿景是愿景，公司战略是策略。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">建立产品路线图</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司</font> 的产品经理，你的任务是为未来一年创建产品路径图。 这个产品路径图应该概述每个季度将开发和上限的主要功能和功能，以及任何会影响开发时间表的相依性或技术考虑因素。 该公司是一家 <font id="zt1">公司类别</font> 的公司，主要销售 <font id="zt1">产品名称</font> ，目标市场是 <font id="zt1">目标市场</font> ，公司愿景是 <font id="zt1">愿景</font> ，公司战略是<font id="zt1">策略</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的产品经理，你的任务是为未来一年创建产品路径图。 这个产品路径图应该概述每个季度将开发和上限的主要功能和功能，以及任何会影响开发时间表的相依性或技术考虑因素。 微软是一家 B2B 科技公司，主要销售 Office 365，目标市场是企业，公司愿景是提供企业级的产品，公司战略是提供企业级的产品。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 500px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为 公司 的产品经理，你要为一个新功能创建产品规格。 撰写一份简洁的产品规格书，概述正在解决的问题，目标用户，功能要求以及预期的商业影响。 该功能是一个功能类别，将由目标用户使用，并解决问题的问题。 该功能应包括功能 1，功能 2，功能 3 和 功能 4。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">创建产品规格</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司</font> 的产品经理，你要为一个新功能创建产品规格。 撰写一份简洁的产品规格书，概述正在解决的问题，目标用户，功能要求以及预期的商业影响。 该功能是一个 <font id="zt1">功能类别</font> ，将由 <font id="zt1">目标用户</font> 使用，并解决 <font id="zt1">问题</font> 的问题。 该功能应包括 <font id="zt1">功能 1</font> ， <font id="zt1">功能 2</font>, <font id="zt1">功能 3</font> 和 <font id="zt1">功能 4</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的产品经理，你要为一个新功能创建产品规格。 撰写一份简洁的产品规格书，概述正在解决的问题，目标用户，功能要求以及预期的商业影响。 该功能是一个线上会议功能，将由企业用户使用，并解决在线上会议的问题。 该功能应包括视频会议，屏幕共享，实时聊天和录制。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height:500px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为公司的产品经理，请为产品名称撰写一份竞争者分析报告，对主要市场的竞争者进行优势和劣势的评估。 研究并分析竞争对手的产品特点、定价、营销策略和目标受众。 使用这些信息来识别差异化的机会并给予产品决策指引。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">竞争者分析</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司</font> 的产品经理，请为 <font id="zt1">产品名称</font> 撰写一份竞争者分析报告，对主要市场的竞争者进行优势和劣势的评估。 研究并分析竞争对手的产品特点、定价、营销策略和目标受众。 使用这些信息来识别差异化的机会并给予产品决策指引。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的产品经理，请为 Office 365 撰写一份竞争者分析报告，对主要市场的竞争者进行优势和劣势的评估。 研究并分析竞争对手的产品特点、定价、营销策略和目标受众。 使用这些信息来识别差异化的机会并给予产品决策指引。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 500px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为公司的产品经理，请为主题发想用户访谈的访纲，访纲中的问题需要是开放式问题，借此来搜集用户的需求和痛点。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">发想用户访谈的访纲</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为 <font id="zt1">公司</font> 的产品经理，请为 <font id="zt1">主题</font> 发想用户访谈的访纲，访纲中的问题需要是开放式问题，借此来搜集用户的需求和痛点。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为微软的产品经理，请为 Office 365 发想用户访谈的访纲，访纲中的问题需要是开放式问题，借此来搜集用户的需求和痛点。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="n">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">HR 与招募</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 33em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一名专业的招募员，请撰写一封招募信，以吸引职位的潜在候选人。 请在信中提及公司的独特优势，以及职位的工作内容和工作环境。 请确保您的招募信内容精简且有吸引力，并且能够吸引潜在候选人的注意力。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">撰写一封招募信</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一名专业的招募员，请撰写一封招募信，以吸引 <font id="zt1">职位</font> 的潜在候选人。 请在信中提及 <font id="zt1">公司</font> 的独特优势，以及 <font id="zt1">职位</font> 的工作内容和工作环境。 请确保您的招募信内容精简且有吸引力，并且能够吸引潜在候选人的注意力。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一名专业的招募员，请撰写一封招募信，以吸引前端软件工程师的潜在候选人。 请在信中提及 Google 的独特优势，以及前端软件工程师的工作内容和工作环境。 请确保您的招募信内容精简且有吸引力，并且能够吸引潜在候选人的注意力。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 33em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名公司的招募专家，你需要在 LinkedIn 上创建一个新职位的招募贴文。使用您在行业招募方面的专业知识和对行业行业的了解，撰写一则有吸引力的招募贴文，以吸引潜在候选人申请这个职位。您的贴文应该突显在这家公司工作的独特机会和挑战，以及成功担任这个职位所需的关键技能和资格。以下是职位描述：职位描述。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">转写一则 LinkedIn 招募贴文</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名 <font id="zt1">公司</font> 的招募专家，你需要在 LinkedIn 上创建一个新职位的招募贴文。 使用您在 <font id="zt1">行业</font> 招募方面的专业知识和对 <font id="zt1">行业</font> 行业的了解，撰写一则有吸引力的招募贴文，以吸引潜在候选人申请这个职位。 您的贴文应该突显在这家 <font id="zt1">公司</font> 工作的独特机会和挑战，以及成功担任这个职位所需的关键技能和资格。 以下是职位描述：<font id="zt1">职位描述</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为一名 Google 的招募专家，你需要在 LinkedIn 上创建一个新职位的招募贴文。 使用您在软件工程师招募方面的专业知识和对软件工程师行业的了解，撰写一则有吸引力的招募贴文，以吸引潜在候选人申请这个职位。 您的贴文应该突显在这家谷歌工作的独特机会和挑战，以及成功担任这个职位所需的关键技能和资格。 以下是职位描述：[附上描述]</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 33em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名专业的 HR， 公司 正在寻找职位的候选人。理想的候选人应该有工作经验的经验，并且拥有技能的专业知识。我们正在寻找一位有才华的人才来填补这个职位，并且正在寻找能够满足职位要求和责任的候选人。请创建一份有吸引力且准确反映职位要求的职位描述。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">撰写一份职位描述</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名专业的 HR，<font id="zt1">公司</font> 正在寻找 <font id="zt1">职位</font> 的候选人。 理想的候选人应该有 <font id="zt1">工作经验</font> 的经验，并且拥有 <font id="zt1">技能</font> 的专业知识。 我们正在寻找一位有才华的人才来填补这个职位，并且正在寻找能够满足职位要求和责任的候选人。 请创建一份有吸引力且准确反映职位要求的职位描述。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为一名专业的 HR， Google 正在寻找前端软件工程师的候选人。 理想的候选人应该有 3 年的经验，并且拥有 TypeScript、React 和 TailwindCSS 的专业知识。 我们正在寻找一位有才华的人才来填补这个职位，并且正在寻找能够满足职位要求和责任的候选人。 请创建一份有吸引力且准确反映职位要求的职位描述。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 33em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名专业的招募员，请撰写一封录取通知信，通知候选人姓名，他已获得公司的职位职位。 在信中，请详细说明录取的原因，附上录取原因。 请确保信件内容清楚，让候选人会愿意选择公司。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">撰写一封录取通知信</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名专业的招募员，请撰写一封录取通知信，通知 <font id="zt1">候选人姓名</font> ，他已获得 <font id="zt1">公司</font> 的 <font id="zt1">职位</font> 职位。 在信中，请详细说明录取的原因，<font id="zt1">附上录取原因</font>。 请确保信件内容清楚，让候选人会愿意选择 <font id="zt1">公司</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为一名专业的招募员，请撰写一封录取通知信，通知王小明，他已获得 Google 的前端软件工程师职位。 在信中，请详细说明录取的原因，[附上录取原因]。 请确保信件内容清楚，让候选人会愿意选择 Google。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 33em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名专业的招募员，请撰写一封拒绝通知信，通知候选人姓名，他没有被录取公司的职位职位。 在信中，请尽量友善地表达感谢，并感谢他们投递申请。 通知候选人，招募团队已经决定选择其他拥有更接近职位需求的技能和经验的候选人。 在信中保持礼貌和专业的语气。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">撰写一封拒绝通知信</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名专业的招募员，请撰写一封拒绝通知信，通知 <font id="zt1">候选人姓名</font> ，他没有被录取 <font id="zt1">公司</font> 的 <font id="zt1">职位</font> 职位。 在信中，请尽量友善地表达感谢，并感谢他们投递申请。 通知候选人，招募团队已经决定选择其他拥有更接近职位需求的技能和经验的候选人。 在信中保持礼貌和专业的语气。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为一名专业的招募员，请撰写一封拒绝通知信，通知王小明，他没有被录取 Google 的前端软件工程师职位。 在信中，请尽量友善地表达感谢，并感谢他们投递申请。 通知候选人，招募团队已经决定选择其他拥有更接近职位需求的技能和经验的候选人。 在信中保持礼貌和专业的语气。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 33em;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名 HR 专业人士，你被任命撰写一封裁员通知信，通知一群即将被公司进行重组的员工。 这封信必须清晰、简洁且有同情心，同时也要概述裁员的原因以及任何有关的终止工资或其他福利的细节。 请使用你在 HR 领域的经验和对公司政策和程序的了解，撰写一封体贴且专业的裁员通知信，以传达对受影响的员工的尊重。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">撰写一封裁员通知信</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名 HR 专业人士，你被任命撰写一封裁员通知信，通知一群即将被 <font id="zt1">公司</font> 进行重组的员工。 这封信必须清晰、简洁且有同情心，同时也要概述裁员的原因以及任何有关的终止工资或其他福利的细节。 请使用你在 HR 领域的经验和对公司政策和程序的了解，撰写一封体贴且专业的裁员通知信，以传达对受影响的员工的尊重。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 作为一名 HR 专业人士，你被任命撰写一封裁员通知信，通知一群即将被 Google 进行重组的员工。 这封信必须清晰、简洁且有同情心，同时也要概述裁员的原因以及任何有关的终止工资或其他福利的细节。 请使用你在 HR 领域的经验和对公司政策和程序的了解，撰写一封体贴且专业的裁员通知信，以传达对受影响的员工的尊重。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="o">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">投资与交易</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名个人投资者，你需要创建一个与你的风险承受能力和财务目标相符的多元化投资组合。 开发一个资产配置策略，包括股票、债券和其他证券的组合。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">资产分配策略</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名个人投资者，你需要创建一个与你的风险承受能力和财务目标相符的多元化投资组合。 开发一个资产配置策略，包括股票、债券和其他证券的组合。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名个人投资者，你需要开发一个交易策略，包括技术和基本分析。 创建一组交易规则，包括进入点和退出点、停损订单和风险管理技术。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">交易策略</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名个人投资者，你需要开发一个交易策略，包括技术和基本分析。 创建一组交易规则，包括进入点和退出点、停损订单和风险管理技术。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名选择权交易员，你需要开发一个选择权交易策略，包括技术和基本分析。 请针对选择权的特性，创建一组交易规则，包括进入点和退出点、停损订单和风险管理技术。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">选择权交易策略</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名选择权交易员，你需要开发一个选择权交易策略，包括技术和基本分析。 请针对选择权的特性，创建一组交易规则，包括进入点和退出点、停损订单和风险管理技术。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名加密货币投资者，你需要开发一个加密货币投资策略，包括技术和基本分析。 请针对加密货币的特性，创建一组交易规则，包括进入点和退出点、停损订单和风险管理技术。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">加密货币投资策略</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名加密货币投资者，你需要开发一个加密货币投资策略，包括技术和基本分析。 请针对加密货币的特性，创建一组交易规则，包括进入点和退出点、停损订单和风险管理技术。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="作为一名外汇交易员，你需要开发一个外汇交易策略，包括技术和基本分析。 创建一组交易规则，包括进入点和退出点、停损订单和风险管理技术。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">外汇交易策略</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>作为一名外汇交易员，你需要开发一个外汇交易策略，包括技术和基本分析。 创建一组交易规则，包括进入点和退出点、停损订单和风险管理技术。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="p">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">日常生活</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="提供给我一个食谱，食材包含食材 1、食材 2、食材..."onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">食谱生成</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>提供给我一个食谱，食材包含 <font id="zt1">食材 1</font>、<font id="zt1">食材 2</font>、<font id="zt1">食材...</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 提供给我一个食谱，食材包含鸡腿肉、鸡蛋、起司。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="请列出这份食谱的采买清单和步骤：数字 人份的 食谱。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">提供食谱</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>请列出这份食谱的采买清单和步骤： <font id="zt1">数字</font> 人份的 <font id="zt1">食谱</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 请列出这份食谱的采买清单和步骤：1 人份的蕃茄炒蛋。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你扮演一位专业的活动企划，请生成活动活动计划清单，包括重要任务和截止日期。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">活动计划清单</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你扮演一位专业的活动企划，请生成 <font id="zt1">活动</font> 活动计划清单，包括重要任务和截止日期。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你扮演一位专业的活动企划，请生成运动会活动计划清单，包括重要任务和截止日期。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="提供数字 个想法 的点子"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">提供点子</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>提供 <font id="zt1">数字</font> 个 <font id="zt1">想法</font> 的点子。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 提供5个情人节的点子。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="提供数字 个想法 的点子"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">旅游计划</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>生成一份 <font id="zt1">数字</font> 天的 <font id="zt1">地点</font> 旅游计划，交通工具是 <font id="zt1">交通工具...</font> 要遵守以下规则：<font id="zt1">填入规则</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 生成一份5天的东京旅游计划，交通工具是地铁和火车。 要遵守以下规则：1. 地点要包含东京铁塔、富士山、迪士尼乐园 2. 需要包含交通如何乘坐 3. 一天不超过3个地点。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="q">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">有趣好玩</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="大家都说我写的歌词像 人名，但我最近有点没灵感，请帮我用 人名 的风格写一首歌。 歌中包含的元素要 关键词..."onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">写歌词</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>大家都说我写的歌词像 <font id="zt1">人名</font>，但我最近有点没灵感，请帮我用 <font id="zt1">人名</font> 的风格写一首歌。 歌中包含的元素要 <font id="zt1">关键词...</font></div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 大家都说我写的歌词像方文山，但我最近有点没灵感，请帮我用方文山的风格写一首歌。 歌中包含的元素要有别离、思念、峰回路转。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="写出一篇有关 故事想法，拥有 风格 风格的短篇故事。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">写故事</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>写出一篇有关 <font id="zt1">故事想法</font>，拥有 <font id="zt1">风格</font> 风格的短篇故事。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 写出一篇有关工程师拯救这个世界的短篇故事。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 320px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是现在最红的饶舌歌手，请创作一首 Rap，主题是 附上主题。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">写 rap</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是现在最红的饶舌歌手，请创作一首 Rap，主题是 <font id="zt1">附上主题</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是现在最红的饶舌歌手，请创作一首 Rap，主题是孤勇者。</div>
+</div>
+</div>
+</div>
+</div>
+<div style="padding-top: 100px;margin-top: -100px;" id="r">
+<div style="display: flex;flex-direction:row;justify-content:center;">
+<div style="display: inline-block;border-bottom: 2px solid #4aa181;padding: 0 30px 10px;text-align:center; font-size:20px;">角色扮演</div>
+</div>
+<div style="display: flex;flex-wrap:wrap;flex-direction:row;margin: 30px 0;justify-content: center; ">
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width: 24em;height: 450px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一名角色，你要针对我提出的问题提供建议。 我的问题是：附上问题。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">综合情境</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一名 <font id="zt1">角色</font>，你要针对我提出的问题提供建议。 我的问题是： <font id="zt1">附上问题</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一名生涯教练，你要针对我提出的问题提供建议。 我的问题是：我是否要出国念书？</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width:23em;height: 450px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你现在是一个 职位 面试官，而我是要应征 职位的面试者。 你需要遵守以下规则：1. 你只能问我有关职位的面试问题。 2. 不需要写解释。 3. 你需要向面试官一样等我回答问题，再提问下一个问题。 我的第一句话是，你好。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">面试官</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一个 <font id="zt1">职位</font> 面试官，而我是要应征 <font id="zt1">职位</font> 的面试者。 你需要遵守以下规则：1. 你只能问我有关 <font id="zt1">职位</font> 的面试问题。 2. 不需要写解释。 3. 你需要向面试官一样等我回答问题，再提问下一个问题。 我的第一句话是，你好。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一个产品经理面试官，而我是要应征产品经理的面试者。 你需要遵守以下规则：1. 你只能问我有关产品经理的面试问题。 2. 不需要写解释。 3. 你需要向面试官一样等我回答问题，再提问下一个问题。 我的第一句话是，你好。</div>
+</div>
+</div>
+<div style="display:flex;background-color: white;box-shadow: 0 0 10px -2px rgba(0, 0,0, .5);width:23em;height: 450px;margin: 15px 30px 15px 30px;border-radius:10px;flex-direction:column;position: relative;">
+<button id="你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是填入需求。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">担任导游</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是 <font id="zt1">填入需求</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是我在阿里山，我想参观博物馆。</div>
+</div>
+</div>
+</div>
+</div> 
+ 
+
+
+
+<!-- <div class="container">
+<div class="div1">
+<button id="你现在是一名角色，你要针对我提出的问题提供建议。 我的问题是：附上问题。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">综合情境</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一名 <font id="zt1">角色</font>，你要针对我提出的问题提供建议。 我的问题是： <font id="zt1">附上问题</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一名生涯教练，你要针对我提出的问题提供建议。 我的问题是：我是否要出国念书？</div>
+</div>
+</div>
+<div class="div2">
+<button id="你现在是一个 职位 面试官，而我是要应征 职位的面试者。 你需要遵守以下规则：1. 你只能问我有关职位的面试问题。 2. 不需要写解释。 3. 你需要向面试官一样等我回答问题，再提问下一个问题。 我的第一句话是，你好。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">面试官</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你现在是一个 <font id="zt1">职位</font> 面试官，而我是要应征 <font id="zt1">职位</font> 的面试者。 你需要遵守以下规则：1. 你只能问我有关 <font id="zt1">职位</font> 的面试问题。 2. 不需要写解释。 3. 你需要向面试官一样等我回答问题，再提问下一个问题。 我的第一句话是，你好。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你现在是一个产品经理面试官，而我是要应征产品经理的面试者。 你需要遵守以下规则：1. 你只能问我有关产品经理的面试问题。 2. 不需要写解释。 3. 你需要向面试官一样等我回答问题，再提问下一个问题。 我的第一句话是，你好。</div>
+</div>
+</div>
+<div class="div3">
+<button id="你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是填入需求。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">担任导游</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是 <font id="zt1">填入需求</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是我在阿里山，我想参观博物馆。</div>
+</div>
+</div>
+<div class="div4">
+<button id="你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是填入需求。"onclick="copyText1(this.id)">复制</button>
+<p style="display: flex;padding-left: 15px;justify-content: flex-start;font-size: 25px;font-weight:900">担任导游</p>
+<div style="display: flex;padding: 30px 5px 0 10px;font-size: 16px;line-height: 30px;">
+<div>你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是 <font id="zt1">填入需求</font>。</div>
+</div>
+<div style="display:flex;justify-content: flex-start;padding: 0 5px 0 10px;line-height: 25px;font-size: 14px; position: absolute;bottom: 10px;">
+<div> <img src="灯泡.png" width="20" height="20"><font id="zt2"> 举例：</font> 你是一位导游，我会把我旅游的位置给你，你要推荐一个靠近我位置的地方。 在某些情况下，我还会告诉您我想旅游地点的类型。 你还会向我推荐靠近我的第一个位置的类似类型的地方。 我的第一个需求是我在阿里山，我想参观博物馆。</div>
+</div> 
+</div>
+</div> -->
+
+</body> 
+</html>

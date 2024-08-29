@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>产品信息</title>
+</head>
+<style>
+#zt
+{
+    font-weight:900;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    background-color: #e0f2fe;
+    border-radius: 10px;
+    color: #f97316;
+}
+#t
+{
+    color: antiquewhite;
+
+}
+#navul
+{
+    width: 480px;
+    display: flex;
+    height: 40px;
+    box-shadow:2px 5px 15px rgba(0, 0,0, .5);
+    border-radius: 5px;
+    line-height: 40px;
+    position: relative;
+            
+}
+.ulson
+{
+    background-color: white;
+    box-shadow:2px 5px 15px rgba(0, 0,0, .5);
+    border-radius: 5px;
+    display: none;
+}
+.navli:hover .ulson
+{
+    display: block;
+        
+}
+.navli
+{
+    font-size: 20px;
+    width: 160px;
+    text-align: center;
+}
+ul li
+{
+    list-style:none;
+}
+.ulson li:not(:first-child)
+{
+    border-top: 1px solid #00ffc3;
+        
+}
+.lison:hover
+{
+    background-color: #4aa181;
+    border-radius: 3px;
+        
+}
+#hk
+{
+    position: absolute;
+    left: 0;
+    height: 40px;
+    width: 160px;
+    background-color: #c5c5c5;
+    border-radius: 5px;
+    z-index: -999;
+    transition: .5s;
+    display: none;
+        
+}
+.navli:nth-child(1):hover~#hk
+{
+    display: block;
+    left: 0;
+}
+.navli:nth-child(2):hover~#hk
+{
+    display: block;
+    left: 160px;
+}
+.navli:nth-child(3):hover~#hk
+    {
+    display: block;
+    left: 320px;
+}
+
+a:hover, a:visited, a:link, a:active 
+{
+    color: black;
+    text-decoration: none;
+}
+html
+{
+    scroll-behavior: smooth;
+        
+}
+           
+</style>
+<style type="text/css">
+*{margin: 0;padding: 0;}
+.nav{
+        height: 100px;
+        width:100%;
+        background: white;
+        position: fixed;
+        top: 0;  
+        left:0;
+        z-index: 99;
+              
+    }
+</style>
+        
+        
+<link rel="stylesheet" href="style.css"/>
+</head>
+        
+<body>
+    <div class="nav">
+        <div style="display: flex;height:60px;justify-content: start;align-items: center;font-size: 22px;font-weight: 1000;position: relative; box-shadow:2px 5px 10px rgba(188, 185, 185, 0.5);padding-left:10px;">
+            <div style="height: 40px;width: 400px;white-space: nowrap;text-align: center;line-height: 40px;margin-right: 180px;">
+                    AIGC提示词生成器
+            </div>
+        <div style="position: relative;margin-left: 500px;">
+            <ul id="navul">
+                <li class="navli">
+                <a href="index.html">首页</a>               
+                </li>
+                <li class="navli">
+                <h4>关于我们</h4>
+                <ul class="ulson">
+                    <li class="lison">
+                        <a href="chanpin.html">产品信息</a>
+                    </li>
+                    <li class="lison">
+                        <a href="liaojie.html">了解使用</a>
+                    </li>
+                    <li class="lison">
+                        <a href="liaojie.html">制作人员</a>
+                    </li>
+                </ul>
+                </li>
+                <li class="navli">
+                <a href="#" id="back-to-top">返回顶部</a>
+                </li>
+                <div id="hk"></div>
+            </ul> 
+        </div>
+    </div>
+    </div>
+<body>
+    <div style="display: flex;flex-direction:row;margin-left: 50px;margin-right: 50px;">
+        <div style="font-size:40px;padding: 150px 10px 0;text-align: left;margin-left: 100px;flex-direction:column">
+            <div>关于 AIGC提示词生成器</div>
+            <div style="font-size:20px ;margin-top: 50px;color: #898989;font-weight: 800;width: 500px;">本产品致力于将深涩难懂的概念，变成白话易懂的内容让新的科技不再离大众那么远，让每个人都能掌握 AI 时代的思维与能力</div>
+            <div style="font-size:18px ;margin-top: 50px;font-weight: 800;width: 600px;">制作AIGC提示词生成器，方案一开始有两种，其一是做一个提供给用户各种情况的提示词模板，其二是制作一个可以让用户输入一段话就自动生成提示词的生成器。最终在市场调研和自身能力的考量下，选择方案一。制作软件为vs，使用html、css等语言。</div>
+        </div>
+        <div style="padding-top: 150px;padding-left: 200px;">
+            <img src="aigc.png" width="500px" height="500px">
+        </div>
+        
+    
+</body>
+</html>
